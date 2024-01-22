@@ -1,0 +1,79 @@
+#include <Servo.h>  //incluir a biblioteca de servo
+
+
+
+int n = 0;  //Entradas seriais
+int pos = 0;  //Posição zero para o servop
+Servo servobase;
+Servo servoart;
+Servo servoponta;
+  //Inclusao do servo
+void setup(){
+  Serial.begin(9600);  //Ativando a porta serial
+ servobase.attach(11);
+ servoart.attach(10);
+ servoponta.attach(12);
+    //Pino do servo+arduino
+  servobase.write(0);  //Servo setado com valor zero
+  Serial.flush();  //Limpando a memoria do serial
+  Serial.println("Digite: \n 1-90 \n 2-180 \n 3-02");  //criação de um cabeçalho no serial
+  servoart.write(0);  //Servo setado com valor zero
+  Serial.flush();  //Limpando a memoria do serial
+  Serial.println("Digite: \n 4-90 \n 5-180 \n 6-02");  //criação de um cabeçalho no serial
+ servoponta.write(0);  //Servo setado com valor zero
+  Serial.flush();  //Limpando a memoria do serial
+  Serial.println("Digite: \n 7-90 \n 8-180 \n 9-02");  //criação de um cabeçalho no serial
+ 
+}
+
+void loop(){
+  if(Serial.available()>0){  //Teste se porta serial esta recebendo dados
+    n = Serial.read();  //leitura de dados
+    Serial.print("Valor lido: ");  
+    Serial.println(n);  //Printa o valor teclado
+
+    if(n==50){  //girar 90
+    servobase.write(90);
+    delay(1500);
+    }
+
+    if(n==51){  //girar 180
+    servobase.write(180);
+    delay(1500);
+    }
+
+    if(n==52){  //volta pra 0
+    servobase.write(-180);
+    delay(1500);
+    }
+     if(n==53){  //girar 90
+    servoart.write(90);
+    delay(1500);
+    }
+
+    if(n==54){  //girar 180
+    servoart.write(180);
+    delay(1500);
+    }
+
+    if(n==55){  //volta pra 0
+    servoart.write(-180);
+    delay(1500);
+    }
+   if(n==56){  //girar 90
+    servoponta.write(90);
+    delay(1500);
+    }
+
+    if(n==57){  //girar 180
+    servoponta.write(180);
+    delay(1500);
+    }
+
+    if(n==58){  //volta pra 0
+    servoponta.write(-180);
+    delay(1500);
+    }
+  
+  Serial.flush();}
+}
